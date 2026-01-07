@@ -1,0 +1,46 @@
+<div class="app-container">
+  <header class="app-header">
+    <div class="header-content">
+      <div class="logo">
+        <span class="logo-icon">🎓</span>
+        <h1>{{ title }}</h1>
+      </div>
+      <nav class="nav-menu">
+        <a routerLink="/vocabulary" routerLinkActive="active" class="nav-link">
+          <span class="nav-icon">📚</span>
+          Vocabulary
+        </a>
+        <a routerLink="/podcast" routerLinkActive="active" class="nav-link">
+          <span class="nav-icon">🎧</span>
+          Podcasts
+        </a>
+        <a routerLink="/news" routerLinkActive="active" class="nav-link">
+          <span class="nav-icon">📰</span>
+          News
+        </a>
+        <a routerLink="/notes" routerLinkActive="active" class="nav-link" *ngIf="isAuthenticated">
+          <span class="nav-icon">📝</span>
+          Notes
+        </a>
+      </nav>
+      <div class="auth-section">
+        <div class="user-menu" *ngIf="isAuthenticated">
+          <span class="user-name">{{ currentUser?.name }}</span>
+          <button class="logout-btn-small" (click)="logout()">Logout</button>
+        </div>
+        <div class="auth-buttons" *ngIf="!isAuthenticated">
+          <a routerLink="/login" class="auth-btn login-btn">Login</a>
+          <a routerLink="/signup" class="auth-btn signup-btn">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="app-footer">
+    <p>© 2026 English Learning Hub - Improve Your English Skills</p>
+  </footer>
+</div>

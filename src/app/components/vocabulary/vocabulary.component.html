@@ -1,0 +1,59 @@
+<div class="vocabulary-container">
+  <div class="header">
+    <h1>📚 Vocabulary Builder</h1>
+    <p class="subtitle">Expand your English vocabulary with these carefully selected words</p>
+    <button class="refresh-btn" (click)="refresh()" [disabled]="loading">
+      <span class="refresh-icon">🔄</span>
+      {{ loading ? 'Loading...' : 'New Words' }}
+    </button>
+  </div>
+
+  <div class="words-grid" *ngIf="!loading">
+    <div class="word-card" *ngFor="let wordDef of words">
+      <div class="word-header">
+        <div class="word-title-section">
+          <h2 class="word-title">{{ wordDef.word }}</h2>
+          <button class="speak-btn" (click)="speakWord(wordDef.word)" title="Pronounce word">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="phonetic" *ngIf="wordDef.phonetic">{{ wordDef.phonetic }}</span>
+      </div>
+
+      <div class="meanings-section">
+        <div class="meaning-block" *ngFor="let meaning of wordDef.meanings">
+          <span class="part-of-speech">{{ meaning.partOfSpeech }}</span>
+          
+          <div class="definitions">
+            <div class="definition-item" *ngFor="let def of meaning.definitions.slice(0, 2)">
+              <p class="definition-text"><strong>Definition:</strong> {{ def.definition }}</p>
+              <p class="example" *ngIf="def.example">
+                <strong>Example:</strong> <em>"{{ def.example }}"</em>
+              </p>
+            </div>
+          </div>
+
+          <div class="word-relations">
+            <div class="relation-item">
+              <strong>Synonyms:</strong>
+              <span class="relation-values">{{ getSynonyms(meaning) }}</span>
+            </div>
+            <div class="relation-item">
+              <strong>Antonyms:</strong>
+              <span class="relation-values">{{ getAntonyms(meaning) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Loading vocabulary...</p>
+  </div>
+</div>

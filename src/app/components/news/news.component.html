@@ -1,0 +1,56 @@
+<div class="news-container">
+  <div class="header">
+    <h1>📰 English News Articles</h1>
+    <p class="subtitle">Read and improve your English reading comprehension</p>
+  </div>
+
+  <div class="articles-grid" *ngIf="!selectedArticle">
+    <article class="article-card" *ngFor="let article of articles" (click)="selectArticle(article)">
+      <div class="article-image" *ngIf="article.imageUrl">
+        <img [src]="article.imageUrl" [alt]="article.title">
+      </div>
+      <div class="article-content">
+        <div class="article-meta">
+          <span class="category">{{ article.category }}</span>
+          <span class="date">{{ formatDate(article.publishedDate) }}</span>
+        </div>
+        <h2 class="article-title">{{ article.title }}</h2>
+        <p class="article-excerpt">{{ article.excerpt }}</p>
+        <div class="article-footer">
+          <span class="author">By {{ article.author }}</span>
+          <span class="read-more">Read More →</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="article-detail" *ngIf="selectedArticle">
+    <button class="back-btn" (click)="closeArticle()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to Articles
+    </button>
+
+    <div class="detail-content">
+      <div class="detail-header">
+        <div class="detail-meta">
+          <span class="category">{{ selectedArticle.category }}</span>
+          <span class="date">{{ formatDate(selectedArticle.publishedDate) }}</span>
+        </div>
+        <h1>{{ selectedArticle.title }}</h1>
+        <p class="author">By {{ selectedArticle.author }}</p>
+      </div>
+
+      <div class="detail-image" *ngIf="selectedArticle.imageUrl">
+        <img [src]="selectedArticle.imageUrl" [alt]="selectedArticle.title">
+      </div>
+
+      <div class="detail-body">
+        <p *ngFor="let paragraph of selectedArticle.content.split('\n\n')">
+          {{ paragraph }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

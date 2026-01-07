@@ -1,0 +1,55 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1>🔐 Welcome Back</h1>
+      <p>Login to access your learning notes</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-input"
+          [class.error]="f['email'].invalid && f['email'].touched"
+          placeholder="your.email@example.com"
+        />
+        <div class="error-message" *ngIf="f['email'].invalid && f['email'].touched">
+          <span *ngIf="f['email'].errors?.['required']">Email is required</span>
+          <span *ngIf="f['email'].errors?.['email']">Please enter a valid email</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-input"
+          [class.error]="f['password'].invalid && f['password'].touched"
+          placeholder="Enter your password"
+        />
+        <div class="error-message" *ngIf="f['password'].invalid && f['password'].touched">
+          <span *ngIf="f['password'].errors?.['required']">Password is required</span>
+          <span *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters</span>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="loading || loginForm.invalid">
+        <span *ngIf="!loading">Login</span>
+        <span *ngIf="loading">Logging in...</span>
+      </button>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a routerLink="/signup" class="link">Sign up here</a></p>
+      </div>
+    </form>
+  </div>
+</div>

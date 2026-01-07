@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "name": "Test User",
+      "email": "test@example.com",
+      "password": "password123",
+      "id": "vpcwajli5",
+      "createdAt": "2026-01-07T04:16:20.951Z"
+    }
+  ],
+  "notes": [
+    {
+      "title": "My First Learning Note",
+      "content": "Today I learned about English vocabulary from the app. The words vantage, motivation, and eloquent were very interesting. I practiced pronunciation using the text-to-speech feature.\n\nEdited: I really like this app!",
+      "userId": "vpcwajli5",
+      "id": "80i1q5o1p",
+      "createdAt": "2026-01-07T04:17:26.977Z",
+      "updatedAt": "2026-01-07T04:18:19.406Z"
+    }
+  ]
+}
