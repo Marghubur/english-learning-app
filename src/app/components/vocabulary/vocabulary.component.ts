@@ -26,14 +26,15 @@ export class VocabularyComponent implements OnInit {
 
     loadRandomWords(): void {
         this.loading = true;
-        const randomWords = this.vocabularyService.getRandomWords(5);
-        this.vocabularyService.getWordDefinitions(randomWords).subscribe({
-            next: (definitions) => {
-                this.words = definitions;
-                this.loading = false;
+        this.vocabularyService.getRandomWordsWithDetails().subscribe({
+            next: (words: WordDefinition[]) => {
+                this.words = words;
+                console.log(this.words);
             },
-            error: (error) => {
-                console.error('Error loading words:', error);
+            error: (error: any) => {
+                console.error('Error fetching words:', error);
+            },
+            complete: () => {
                 this.loading = false;
             }
         });
